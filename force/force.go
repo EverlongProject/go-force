@@ -20,7 +20,7 @@ const (
 )
 
 func Create(version, clientId, clientSecret, userName, password, securityToken,
-	environment, loginUri string) (*ForceApi, error) {
+	environment, loginUri string, fLogger ForceApiLogger) (*ForceApi, error) {
 	oauth := &forceOauth{
 		clientId:      clientId,
 		clientSecret:  clientSecret,
@@ -37,6 +37,7 @@ func Create(version, clientId, clientSecret, userName, password, securityToken,
 		apiSObjectDescriptions: make(map[string]*SObjectDescription),
 		apiVersion:             version,
 		oauth:                  oauth,
+		logger:                 fLogger,
 	}
 
 	// Init oauth
